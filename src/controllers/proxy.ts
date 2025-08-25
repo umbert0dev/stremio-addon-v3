@@ -1,15 +1,11 @@
 import { Request, Response } from "express";
-import { StreamingStrategy } from "@services/StreamingStrategy";
 import { UtilityHelper } from '@utils/UtilityHelper';
 import axios from "axios";
 import { AppError } from "@utils/errors/AppError";
 import { NotFoundError } from "@utils/errors/NotFoundError";
-import { BadRequestError } from "@utils/errors/BadRequestError";
 
 
 export const getM3u8Content = async (req: Request, res: Response): Promise<string> => {
-    const protocol = req.protocol;
-    const host = req.get("host") || "";
     if (!req.query.d) throw new Error('Missing m3u8 URL');
     let d = req.query.d as string;
     let url = decodeURIComponent(Buffer.from(d, "base64").toString());

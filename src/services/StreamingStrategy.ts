@@ -15,7 +15,7 @@ export class StreamingStrategy {
         }
         const domain = await DomainService.getDomain(providerKey);
         if (!domain) {
-            throw new Error(`Dominio non trovato per il codice: ${providerKey}`);
+            throw new Error(`Domain with code: ${providerKey} not found`);
         }
         return new ServiceClass(mediaType, domain.baseURL, protocol, host);
     }

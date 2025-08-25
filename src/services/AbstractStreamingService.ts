@@ -21,8 +21,8 @@ export abstract class AbstractStreamingService {
         if (new.target === AbstractStreamingService) {
             throw new Error("AbstractStreamingService cannot be instantiated directly.");
         }
-        if (!mediaType) throw new Error('Il tipo di media non può essere nullo');
-        if (!serviceCode) throw new Error('serviceCode non può essere nullo');
+        if (!mediaType) throw new Error('mediaType cannot be null');
+        if (!serviceCode) throw new Error('serviceCode cannot be null');
 
         this.serviceCode = serviceCode;
         this.client = axios.create({});

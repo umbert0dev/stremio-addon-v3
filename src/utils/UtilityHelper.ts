@@ -108,14 +108,14 @@ export class UtilityHelper {
                 }
 
             } catch (err) {
-                console.error('Errore nella response handler', err);
+                console.error('Page response error', err);
             }
         });
     
         try {
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+            await page.goto(url, { waitUntil: 'networkidle2', timeout: 10000 });
         
-            const foundUrls = new Promise(resolve => {
+            const foundStreamUrl = new Promise(resolve => {
                 const interval = setInterval(() => {
                     if (m3u8Obj && m3u8Obj.url) {
                         clearInterval(interval);
@@ -123,21 +123,20 @@ export class UtilityHelper {
                     }
                 }, 500);
             });
-              const timeout = new Promise((_, reject) =>
-                  setTimeout(() => reject(new Error('Timeout: No stream URL detected within 10 seconds')), 10000)
-              );
-            await Promise.race([foundUrls, timeout]);
-            await page.close();
-            if (!m3u8Obj) {
-                throw new Error('No stream URL found');
-            }
-            await browser.close();
-            return m3u8Obj;
-        } catch (err) {
-            LogService.log(err, 'error');
-            await browser.close();
-            return m3u8Obj;
+            const timeout = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Timeout: No stream URL detected within 30 seconds')), 30000)
+            );
+            await Promise.race([foundStreamUrl, timeout]);
+        } catch (error) {
+            LogService.log(error, 'error');
         }
+        try {
+            await page.close();
+            await browser.close();
+        } catch (error) {
+            LogService.log(error, 'error');
+        }
+        return m3u8Obj;
     }
 
     static rewriteTsOrM3u8(m3u8Content: string, referer: string, origin: string, domain: string): string 
