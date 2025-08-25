@@ -6,7 +6,7 @@ import { UtilityHelper } from '@utils/UtilityHelper';
 
 export class RojadirectaService extends AbstractStreamingService {
     constructor(mediaType: string, baseURL: string, protocol: string, host: string) {
-        super('rojadirecta', mediaType, protocol, host, baseURL);
+        super('rojadirecta', mediaType, baseURL, protocol, host);
     }
 
     async getMediaLinks(id: string): Promise<StreamObject[]> {

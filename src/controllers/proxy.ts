@@ -12,9 +12,7 @@ export const getM3u8Content = async (req: Request, res: Response): Promise<strin
     const host = req.get("host") || "";
     if (!req.query.d) throw new Error('Missing m3u8 URL');
     let d = req.query.d as string;
-    let service = req.params.service as string;
     let url = decodeURIComponent(Buffer.from(d, "base64").toString());
-    const realService = await StreamingStrategy.create(service, 'tv', protocol, host);
     let m3u8Object = await UtilityHelper.sniffM3u8(url);
     if (!m3u8Object) {
         throw new NotFoundError("m3u8Object not found");

@@ -113,7 +113,7 @@ export class UtilityHelper {
         });
     
         try {
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 10000 });
+            await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
         
             const foundUrls = new Promise(resolve => {
                 const interval = setInterval(() => {
