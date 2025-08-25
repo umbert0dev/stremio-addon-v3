@@ -1,12 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 import * as cheerioLib from "cheerio";
 import LogService from './LogService';
-import { DomainService } from './DomainService';
 import StreamObject from '@models/StreamObject';
 import { Meta } from '@models/Meta';
-import { M3U8Object } from '@models/M3U8Object';
-import { Dialog, HTTPRequest, HTTPResponse, launch } from 'puppeteer';
-import PuppeteerSingleton from '@/src/services/PuppeteerSingleton';
 
 export abstract class AbstractStreamingService {
     externalId: string | null = null;

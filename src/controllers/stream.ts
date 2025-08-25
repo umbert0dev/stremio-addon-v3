@@ -17,9 +17,7 @@ export const getTvCahnnel = async (req: Request, res: Response): Promise<Stream[
         const providerKey = id.split("-")[1];
         if (providerKey && externalId) {
             const realService = await StreamingStrategy.create(providerKey, type, protocol, host);
-            if (realService) {
-                streamList = await realService.getMediaLinks(externalId);
-            }
+            streamList = await realService.getMediaLinks(externalId);
         }
         
     }

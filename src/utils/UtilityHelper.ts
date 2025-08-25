@@ -2,7 +2,7 @@ import { M3U8Object } from "../models/M3U8Object";
 import { Browser, LaunchOptions, DEFAULT_INTERCEPT_RESOLUTION_PRIORITY, BrowserContext, Dialog, HTTPRequest } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
-import LogService from "../services/LogService";
+import LogService from "@services/LogService";
 puppeteer.use(
   AdblockerPlugin({
     interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY
@@ -101,8 +101,8 @@ export class UtilityHelper {
                         m3u8Obj = {
                             content: null,
                             url,
-                            referer: headers['referer'] || null,
-                            origin: headers['origin'] || null
+                            referer: headers['referer'] || '',
+                            origin: headers['origin'] || ''
                         };
                     }
                 }

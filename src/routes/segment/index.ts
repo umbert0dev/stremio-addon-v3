@@ -1,14 +1,14 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import * as segmentController from "@controllers/segment";
-
+import { BadRequestError } from "@/src/utils/errors/BadRequestError";
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (!req.query.s) throw new Error("missing s param");
-    if (!req.query.referer) throw new Error("missing referer param");
-    if (!req.query.origin) throw new Error("missing origin param");
-    if (!req.query.domain) throw new Error("missing domain param");
+    if (!req.query.s) throw new BadRequestError("missing s param");
+    if (!req.query.referer) throw new BadRequestError("missing referer param");
+    if (!req.query.origin) throw new BadRequestError("missing origin param");
+    if (!req.query.domain) throw new BadRequestError("missing domain param");
     const s = req.query.s as string;
     const segmentPath = Buffer.from(s, "base64").toString();
     const referer = decodeURIComponent(req.query.referer as string);
@@ -19,8 +19,8 @@ router.get("/", async (req, res) => {
 
     res.setHeader("Content-Type", response.headers["content-type"]);
     response.data.pipe(res);
-  } catch (err) {
-    res.status(500).send("Error fetching segment");
+  } catch (error) {
+    next(error)
   }
 });
 

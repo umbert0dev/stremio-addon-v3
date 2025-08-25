@@ -15,9 +15,7 @@ export const getChannelList = async (req: Request, res: Response): Promise<Chann
         const channelPromises = domains.map(async (domain) => {
             let channelList = [];
             const realService = await StreamingStrategy.create(domain.code, type, protocol, host);
-            if (realService) {
-                channelList = await realService.getChannelList();
-            }
+            channelList = await realService.getChannelList();
             return channelList;
         });
         const channels = await Promise.all(channelPromises);

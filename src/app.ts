@@ -7,10 +7,10 @@ import cors from 'cors';
 import session from 'express-session';
 import FileStore from 'session-file-store';
 import favicon from 'serve-favicon';
-import { Request, Response, NextFunction } from 'express';
 import { BASE_DIR } from '@config/paths';
 
 import indexRouter from '@routes/index';
+import { ErrorHandler } from './middlewares/ErrorHandler';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -55,16 +55,6 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 
-app.use((req, res, next) => {
-  next(createError(404));
-});
-
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(ErrorHandler.handleError);
 
 export default app;
