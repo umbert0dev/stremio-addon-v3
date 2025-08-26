@@ -13,10 +13,10 @@ export class CatalogController {
         if(!providerCode) throw new BadRequestError(`missing providerCode`);
         const host = req.get("host") || "";
         const protocol = req.protocol;
-        let channels = await CatalogService.getChannelList(providerCode, type, protocol, host);
+        let channels = await CatalogService.getChannelList(type, providerCode, protocol, host);
         res.json({ metas: channels });
     } catch (error) {
-      next(error);
+        next(error);
     }
   }
 }
