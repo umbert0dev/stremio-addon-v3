@@ -20,9 +20,12 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
   const filePath = path.join(BASE_DIR, 'src/public/html/index.html');
   let html = fs.readFileSync(filePath, 'utf-8');
   let protocol = req.protocol;
-  let host = req.get('host');
+  let host = req.get('host') || '';
   let manifestDomain = `${protocol}://${host}`;
-  html = html.replace('{{_DOMAIN_}}', manifestDomain);
+  html = html.replace(/{{_DOMAIN_}}/g, manifestDomain);
+  html = html.replace(/{{_STREMIO_ADDON_DOMAIN_}}/g, host);
+  let version = manifest.version;
+  html = html.replace(/{{__ADDON_VERSION__}}/g, version);
   res.send(html);
 });
 

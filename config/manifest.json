@@ -1,6 +1,6 @@
 {
     "id": "community.ihaveastream",
-    "description": "IHaveAStream is a Stremio addon that allows you to find and play movies, TV series and live streaming channels",
+    "description": "IHaveAStream is a Stremio addon that allows you to find and play live streaming channels",
     "version": "1.0.0",
     "name": "IHaveAStream",
     "resources": ["stream", "catalog", "meta"],

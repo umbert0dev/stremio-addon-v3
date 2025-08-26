@@ -20,14 +20,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>IHaveAStream</h1>
+        <h1>IHaveAStream <span style="font-size: 14px;">({{__ADDON_VERSION__}})</span></h1>
         <div class="input-group">
             <input type="text" id="manifest-url" value="{{_DOMAIN_}}/manifest.json" readonly>
-            <button id="copy-btn" onclick="copyToClipboard()">Copy</button>
+            <div class="d-flex gap-10 mt-10">
+                <button style="background-color: #22b467;">
+                    <a style="color: white; text-decoration: none;" href="stremio://{{_STREMIO_ADDON_DOMAIN_}}/manifest.json">Install</a>
+                </button>
+                <button style="background-color: #dc30ff;">
+                    <a style="color: white; text-decoration: none;" href="https://web.stremio.com/#/addons?addon={{_DOMAIN_}}/manifest.json">Install (Web)</a>
+                </button>
+                <button id="copy-btn" onclick="copyToClipboard()">Copy</button>
+                <button style="background-color: #438CB3;" onclick="window.location.href='/providers'">Configure</button>
+                <button style="background-color: #ff3b00;" onclick="window.location.href='/stats'">Stats</button>
+            </div>
         </div>
-        <br>
-        <button onclick="window.location.href='/providers'">Manage providers</button>
-        <button onclick="window.location.href='/stats'">Stats</button>
     </div>
 </body>
 </html>
