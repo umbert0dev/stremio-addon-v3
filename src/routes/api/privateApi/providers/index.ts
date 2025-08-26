@@ -1,26 +1,22 @@
 import express from 'express';
-import * as ApiController from '@controllers/api';
+import { body, param } from 'express-validator';
+import { validateRequest } from '@/src/middlewares/validateRequest';
+import { ApiController } from '@/src/controllers/ApiController';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    try {
-        const domains = await ApiController.getProviders(req, res);
-        res.json(domains);
-    } catch (error) {
-        let err = error as { message?: string; status?: number };
-        res.status(err.status || 500).json({ success: false, message: err.message });
-    }
-});
+router.get('/',
+    ApiController.getProviders
+);
 
-router.put('/:code', async (req, res) => {
-    try {
-        const response = await ApiController.updateProvider(req, res);
-        res.json(response);
-    } catch (error) {
-        let err = error as { message?: string; status?: number };
-        res.status(err.status || 500).json({ success: false, message: err.message });
-    }
-});
+router.put('/:code', 
+    [
+        param("code").exists().withMessage("missing code path param").isString(),
+        body("baseURL").exists().withMessage("missing baseURL body param").isString(),
+        body("active").exists().withMessage("missing active body param").isString(),
+        validateRequest
+    ],
+    ApiController.updateProvider
+);
 
 export default router;
