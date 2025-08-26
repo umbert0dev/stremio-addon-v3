@@ -1,12 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
-import * as authMw from '@mw/authMw';
+import { AuthMw } from '@mw/AuthMw';
 import { BASE_DIR } from '@config/paths';
 
 const router = express.Router();
 
 if (process.env.USE_CREDENTIALS === "true") {
-    router.use(authMw.isAuthenticatedWeb);
+    router.use(AuthMw.isAuthenticatedWeb);
 }
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {

@@ -8,16 +8,18 @@ declare module 'express-session' {
   }
 }
 
-export const isAuthenticatedApi = (req: Request, res: Response, next: NextFunction) => {
+export class AuthMw {
+  static isAuthenticatedApi = (req: Request, res: Response, next: NextFunction) => {
     if (req.session?.loggedIn) {
         return next();
     }
     res.sendStatus(401);
-};
+  };
 
-export const isAuthenticatedWeb = (req: Request, res: Response, next: NextFunction) => {
+  static isAuthenticatedWeb = (req: Request, res: Response, next: NextFunction) => {
     if (req.session?.loggedIn) {
         return next();
     }
     res.redirect('/login');
-};
+  };
+}
