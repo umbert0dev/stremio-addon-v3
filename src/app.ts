@@ -16,7 +16,6 @@ const app = express();
 app.set('trust proxy', 1);
 
 app.use(favicon(path.join(BASE_DIR, 'src/public/images', 'favicon.ico')));
-console.log(path.join(BASE_DIR, 'src/public/images', 'favicon.ico'))
 
 const FileStoreClass = FileStore(session);
 

@@ -3,7 +3,7 @@ import * as CatalogController from "@controllers/catalog";
 
 const router = express.Router();
 
-router.get("/:type/tv_channels.json", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/:type/ihavestream_channels.json", async (req: Request, res: Response, next: NextFunction) => {
   try {
     const channels = await CatalogController.getChannelList(req, res);
     res.json({ metas: channels });

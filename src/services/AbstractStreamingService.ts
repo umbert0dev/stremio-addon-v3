@@ -3,6 +3,8 @@ import * as cheerioLib from "cheerio";
 import LogService from './LogService';
 import StreamObject from '@models/StreamObject';
 import { Meta } from '@models/Meta';
+import { Provider } from '../models/Provider';
+import { CatalogChannel } from '../models/CatalogChannel';
 
 export abstract class AbstractStreamingService {
     externalId: string | null = null;
@@ -15,9 +17,9 @@ export abstract class AbstractStreamingService {
     serviceCode: string;
     protocol: string;
     host: string;
-    baseURL!: string;
+    provider!: Provider;
 
-    constructor(serviceCode: string, mediaType: string, baseURL: string, protocol: string, host: string) {
+    constructor(serviceCode: string, mediaType: string, provider: Provider, protocol: string, host: string) {
         if (new.target === AbstractStreamingService) {
             throw new Error("AbstractStreamingService cannot be instantiated directly.");
         }
@@ -29,11 +31,11 @@ export abstract class AbstractStreamingService {
         this.mediaType = mediaType;
         this.protocol = protocol;
         this.host = host;
-        this.baseURL = baseURL;
+        this.provider = provider;
     }
 
     abstract getMediaLinks(id: string): Promise<StreamObject[]>;
-    abstract getChannelList(): Promise<any[]>;
+    abstract getChannelList(): Promise<CatalogChannel[]>;
     abstract getTvChannelMeta(id: string): Promise<Meta>;
 
     setExternalId(externalId: string) {

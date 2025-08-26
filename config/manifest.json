@@ -5,11 +5,11 @@
     "name": "IHaveAStream",
     "resources": ["stream", "catalog", "meta"],
     "types": ["tv"],
-    "idPrefixes": ["tt", "havestream"],
+    "idPrefixes": ["tt", "ihavestream"],
     "catalogs": [
         {
             "type": "tv",
-            "id": "tv_channels",
+            "id": "ihavestream_channels",
             "name": "IHaveAStream"
         }
     ],

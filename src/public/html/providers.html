@@ -21,7 +21,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="domain-table-body">
+                    <tbody id="provider-table-body">
                     </tbody>
                 </table>
             </div>
@@ -46,26 +46,26 @@
             }, 3000);
         }
 
-        async function fetchDomains() {
-            let response = await fetch('/api/domains');
-            let domains = await response.json();
-            let tableBody = document.getElementById('domain-table-body');
+        async function fetchProviders() {
+            let response = await fetch('/api/providers');
+            let providers = await response.json();
+            let tableBody = document.getElementById('provider-table-body');
             let accordionBody = document.getElementById('service-accordion');
             tableBody.innerHTML = '';
 
-            domains.forEach(domain => {
-                let isActive = domain.active == true;
+            providers.forEach(provider => {
+                let isActive = provider.active == true;
                 let row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${domain.code}</td>
-                    <td><input type="text" value="${domain.baseURL}" id="input-${domain.code}"></td>
+                    <td>${provider.code}</td>
+                    <td><input type="text" value="${provider.baseURL}" id="input-${provider.code}"></td>
                     <td>
                         <label class="switch">
-                            <input type="checkbox" id="active-${domain.code}" ${isActive ? 'checked' : ''}>
+                            <input type="checkbox" id="active-${provider.code}" ${isActive ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
                     </td>
-                    <td><button onclick="updateDomain('${domain.code}')">Save</button></td>
+                    <td><button onclick="updateProvider('${provider.code}')">Save</button></td>
                 `;
                 tableBody.appendChild(row);
 
@@ -73,19 +73,19 @@
                 div.classList.add('service-accordion-content');
                 div.innerHTML = `
                     <div class="accordion-item">
-                        <button class="accordion-header">${domain.code}<span class="arrow">\></span></button>
+                        <button class="accordion-header">${provider.code}<span class="arrow">\></span></button>
                         <div class="accordion-content">
                             <div class="accordion-inner">
                                 <div class="input-div">
-                                    <input type="text" value="${domain.baseURL}" id="input-${domain.code}">
+                                    <input type="text" value="${provider.baseURL}" id="input-${provider.code}">
                                 </div>
                                 <div>
                                     <label class="switch">
-                                        <input type="checkbox" id="active-${domain.code}" ${domain.active ? 'checked' : ''}>
+                                        <input type="checkbox" id="active-${provider.code}" ${provider.active ? 'checked' : ''}>
                                         <span class="slider"></span>
                                     </label>
                                 </div>
-                                <button onclick="updateDomain('${domain.code}')">Save</button>
+                                <button onclick="updateProvider('${provider.code}')">Save</button>
                             </div>
                         </div>
                     </div>
@@ -102,14 +102,14 @@
             });
         }
 
-        async function updateDomain(code) {
+        async function updateProvider(code) {
             let input = document.getElementById(`input-${code}`);
             let baseURL = input.value;
             let isActive = document.getElementById(`active-${code}`).checked;
             let active = isActive ? true : false;
 
 
-            let response = await fetch('/api/domains/'+code, {
+            let response = await fetch('/api/providers/'+code, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -117,12 +117,12 @@
                 body: JSON.stringify({ baseURL, active })
             });
             if (response.ok) {
-                showToast('Domain successfully updated!', 'success');
+                showToast('Provider successfully updated!', 'success');
             } else {
-                showToast('Error updating domain.', 'error');
+                showToast('Error updating provider.', 'error');
             }
         }
-        fetchDomains();
+        fetchProviders();
     </script>
 </body>
 </html>

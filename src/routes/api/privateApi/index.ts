@@ -1,5 +1,5 @@
 import express from 'express';
-import apiDomainsRouter from '@routes/api/privateApi/domains';
+import apiProviderRouter from '@routes/api/privateApi/providers';
 import apiStatsRouter from '@routes/api/privateApi/stats';
 import * as authMw from '@mw/authMw';
 
@@ -9,7 +9,7 @@ if (process.env.USE_CREDENTIALS === "true") {
     router.use(authMw.isAuthenticatedApi);
 }
 
-router.use('/domains', apiDomainsRouter);
+router.use('/providers', apiProviderRouter);
 router.use('/stats', apiStatsRouter);
 
 export default router;

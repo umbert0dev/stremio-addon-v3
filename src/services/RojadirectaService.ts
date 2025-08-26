@@ -3,10 +3,12 @@ import StreamObject from '@models/StreamObject';
 import { ChannelLink } from '@models/ChannelLink';
 import { Meta } from '@models/Meta';
 import { UtilityHelper } from '@utils/UtilityHelper';
+import { Provider } from '../models/Provider';
+import { CatalogChannel } from '../models/CatalogChannel';
 
 export class RojadirectaService extends AbstractStreamingService {
-    constructor(mediaType: string, baseURL: string, protocol: string, host: string) {
-        super('rojadirecta', mediaType, baseURL, protocol, host);
+    constructor(mediaType: string, provider: Provider, protocol: string, host: string) {
+        super('rojadirecta', mediaType, provider, protocol, host);
     }
 
     async getMediaLinks(id: string): Promise<StreamObject[]> {
@@ -14,7 +16,7 @@ export class RojadirectaService extends AbstractStreamingService {
         try {
             const mediaId = id.split("-")[2];
             if (mediaId) {
-                const response = await this.client.get(this.baseURL, { 
+                const response = await this.client.get(this.provider.baseURL, { 
                     headers: {
                         "User-Agent": UtilityHelper.randomUserAgent()
                     }
@@ -50,8 +52,8 @@ export class RojadirectaService extends AbstractStreamingService {
         return streamList;
     }
 
-    async getChannelList(): Promise<any[]> {
-        const response = await this.client.get(this.baseURL, {
+    async getChannelList(): Promise<CatalogChannel[]> {
+        const response = await this.client.get(this.provider.baseURL, {
             headers: {
                 "User-Agent": UtilityHelper.randomUserAgent()
             }
@@ -63,11 +65,13 @@ export class RojadirectaService extends AbstractStreamingService {
             const time = $(el).find('span.t').first().text().replace(/\s+/g, ' ').trim();
             const title = $(el).find('span[itemprop="name"]').text().replace(/\s+/g, ' ').trim();
             return {
-                id: `havestream-${this.serviceCode}-${index}`,
+                id: `ihavestream-${this.serviceCode}-${index}`,
                 name: `(${time}) ${title}`,
                 type: 'tv',
+                genres: ['roja'],
+                logo: this.provider.poster,
                 posterShape: 'square'
-            };
+            } as CatalogChannel;
         }));
 
         return channels;
@@ -83,7 +87,7 @@ export class RojadirectaService extends AbstractStreamingService {
             genres: null
         };
         if (mediaId) {
-            const response = await this.client.get(this.baseURL, { 
+            const response = await this.client.get(this.provider.baseURL, { 
                 headers: {
                     "User-Agent": UtilityHelper.randomUserAgent()
                 }

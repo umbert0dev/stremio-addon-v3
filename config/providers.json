@@ -2,6 +2,7 @@
   {
     "code": "rojadirecta",
     "baseURL": "http://www.rojadirecta.eu/",
-    "active": true
+    "active": true,
+    "poster": "https://i.ibb.co/pvc0GncG/roja.png"
   }
 ]

@@ -10,7 +10,7 @@ if (process.env.USE_CREDENTIALS === "true") {
 }
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.sendFile(path.join(BASE_DIR, 'src/public/html/domains.html'));
+    res.sendFile(path.join(BASE_DIR, 'src/public/html/providers.html'));
 });
 
 export default router;

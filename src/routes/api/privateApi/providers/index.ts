@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const domains = await ApiController.getDomains(req, res);
+        const domains = await ApiController.getProviders(req, res);
         res.json(domains);
     } catch (error) {
         let err = error as { message?: string; status?: number };
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 router.put('/:code', async (req, res) => {
     try {
-        const response = await ApiController.updateDomain(req, res);
+        const response = await ApiController.updateProvider(req, res);
         res.json(response);
     } catch (error) {
         let err = error as { message?: string; status?: number };

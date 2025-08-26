@@ -3,7 +3,7 @@ FROM node:22-bookworm-slim
 WORKDIR /app
 
 COPY . .
-COPY config/domains.json data/domains.json
+COPY config/providers.json data/providers.json
 
 RUN apt update
 

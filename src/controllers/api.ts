@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
-import { DomainService } from '@services/DomainService';
+import { ProviderManager } from '@services/ProviderManager';
 
-export const getDomains = async (req: Request, res: Response) => {
-    return DomainService.getAllDomains();
+export const getProviders = async (req: Request, res: Response) => {
+    return ProviderManager.getAllProviders();
 };
 
-export const updateDomain = async (req: Request, res: Response) => {
+export const updateProvider = async (req: Request, res: Response) => {
     const { code } = req.params;
     const { baseURL, active } = req.body;
     if (code) {
-        let domainObj = {
+        let providerObj = {
             code,
             baseURL,
             active: active
         };
-        await DomainService.updateDomainByCode(code, domainObj);
+        await ProviderManager.updateProviderByCode(code, providerObj);
     }
 
     return { success: true };
