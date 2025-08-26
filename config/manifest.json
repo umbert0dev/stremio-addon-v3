@@ -5,13 +5,10 @@
     "name": "IHaveAStream",
     "resources": ["stream", "catalog", "meta"],
     "types": ["tv"],
-    "idPrefixes": ["tt", "ihavestream"],
+    "idPrefixes": ["tt", "ihaveastream"],
     "catalogs": [
-        {
-            "type": "tv",
-            "id": "ihavestream_channels",
-            "name": "IHaveAStream"
-        }
+        { "type": "tv", "id": "ihaveastream_rojadirecta", "name": "Rojadirecta" },
+        { "type": "tv", "id": "ihaveastream_matchstream", "name": "Matchstream" }
     ],
     "logo": "https://i.ibb.co/274HsDvF/i-Have-AStream.png"
 }

@@ -65,7 +65,7 @@ export class RojadirectaService extends AbstractStreamingService {
             const time = $(el).find('span.t').first().text().replace(/\s+/g, ' ').trim();
             const title = $(el).find('span[itemprop="name"]').text().replace(/\s+/g, ' ').trim();
             return {
-                id: `ihavestream-${this.serviceCode}-${index}`,
+                id: `ihaveastream-${this.serviceCode}-${index}`,
                 name: `(${time}) ${title}`,
                 type: 'tv',
                 genres: ['roja'],
