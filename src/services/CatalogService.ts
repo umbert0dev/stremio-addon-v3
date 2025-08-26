@@ -1,4 +1,4 @@
-import { CatalogChannel } from "../models/CatalogChannel";
+import { CatalogChannel } from "@models/CatalogChannel";
 import { StreamingStrategy } from "./StreamingStrategy";
 
 export class CatalogService {

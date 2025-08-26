@@ -3,8 +3,8 @@ import StreamObject from '@models/StreamObject';
 import { ChannelLink } from '@models/ChannelLink';
 import { Meta } from '@models/Meta';
 import { UtilityHelper } from '@utils/UtilityHelper';
-import { Provider } from '../models/Provider';
-import { CatalogChannel } from '../models/CatalogChannel';
+import { Provider } from '@models/Provider';
+import { CatalogChannel } from '@models/CatalogChannel';
 
 export class RojadirectaService extends AbstractStreamingService {
     constructor(mediaType: string, provider: Provider, protocol: string, host: string) {

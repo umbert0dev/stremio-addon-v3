@@ -1,4 +1,4 @@
-import { M3U8Object } from "../models/M3U8Object";
+import { M3U8Object } from "@models/M3U8Object";
 import { Browser, LaunchOptions, DEFAULT_INTERCEPT_RESOLUTION_PRIORITY, BrowserContext, Dialog, HTTPRequest } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';

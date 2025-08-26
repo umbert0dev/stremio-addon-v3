@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UtilityHelper } from "../utils/UtilityHelper";
+import { UtilityHelper } from "@utils/UtilityHelper";
 
 export class SegmentService {
     static async getStreamSegment(segmentPath: string, referer: string, origin: string, domain: string) {

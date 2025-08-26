@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { BadRequestError } from "../utils/errors/BadRequestError";
-import { ApiService } from "../services/ApiService";
+import { BadRequestError } from "@utils/errors/BadRequestError";
+import { ApiService } from "@services/ApiService";
 
 export class ApiController {
     static async updateProvider(req: Request, res: Response, next: NextFunction) {

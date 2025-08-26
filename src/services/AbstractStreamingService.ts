@@ -3,8 +3,8 @@ import * as cheerioLib from "cheerio";
 import LogService from './LogService';
 import StreamObject from '@models/StreamObject';
 import { Meta } from '@models/Meta';
-import { Provider } from '../models/Provider';
-import { CatalogChannel } from '../models/CatalogChannel';
+import { Provider } from '@models/Provider';
+import { CatalogChannel } from '@models/CatalogChannel';
 
 export abstract class AbstractStreamingService {
     externalId: string | null = null;

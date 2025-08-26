@@ -5,7 +5,7 @@ import { getErrorMessage, sendError } from '@utils/responseHelper';
 export class ErrorHandler {
   static handleError = (err: unknown, req: Request,
     res: Response, next: NextFunction ) => {
-    if (err instanceof AppError) {
+    if (err instanceof InternalServerError) {
       return sendError(res, err.statusCode, err.message);
     }
     const message = getErrorMessage(err);

@@ -1,5 +1,5 @@
-import { Provider } from "../models/Provider";
-import { InternalServerError } from "../utils/errors/InternalServerError";
+import { Provider } from "@models/Provider";
+import { InternalServerError } from "@utils/errors/InternalServerError";
 import { ProviderManager } from "./ProviderManager";
 import { exec } from "child_process";
 

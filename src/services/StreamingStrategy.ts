@@ -1,4 +1,4 @@
-import { BadRequestError } from "../utils/errors/BadRequestError";
+import { BadRequestError } from "@utils/errors/BadRequestError";
 import { AbstractStreamingService } from "./AbstractStreamingService";
 import { ProviderManager } from "./ProviderManager";
 import { RojadirectaService } from "./RojadirectaService";

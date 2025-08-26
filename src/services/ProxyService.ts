@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UtilityHelper } from "@utils/UtilityHelper";
-import { NotFoundError } from "../utils/errors/NotFoundError";
-import { InternalServerError } from "../utils/errors/InternalServerError";
+import { NotFoundError } from "@utils/errors/NotFoundError";
+import { InternalServerError } from "@utils/errors/InternalServerError";
 
 export class ProxyService {
   static async getM3u8ContentByUrl(url: string): Promise<string> {

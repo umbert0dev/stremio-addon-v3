@@ -3,8 +3,8 @@ import { Request, Response, NextFunction } from "express";
 import { M3u8Service } from "@/src/services/M3u8Service";
 import { Meta } from "@models/Meta";
 import { StreamingStrategy } from "@services/StreamingStrategy";
-import { BadRequestError } from "../utils/errors/BadRequestError";
-import { MetaService } from "../services/MetaService";
+import { BadRequestError } from "@utils/errors/BadRequestError";
+import { MetaService } from "@services/MetaService";
 
 export class MetaController {
   static async getTvChannelMeta(req: Request, res: Response, next: NextFunction) {

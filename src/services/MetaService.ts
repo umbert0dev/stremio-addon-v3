@@ -1,8 +1,8 @@
 import axios from "axios";
 import { UtilityHelper } from "@utils/UtilityHelper";
-import { NotFoundError } from "../utils/errors/NotFoundError";
-import { InternalServerError } from "../utils/errors/InternalServerError";
-import { Meta } from "../models/Meta";
+import { NotFoundError } from "@utils/errors/NotFoundError";
+import { InternalServerError } from "@utils/errors/InternalServerError";
+import { Meta } from "@models/Meta";
 import { StreamingStrategy } from "./StreamingStrategy";
 
 export class MetaService {
