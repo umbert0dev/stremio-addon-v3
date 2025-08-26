@@ -5,7 +5,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-
+    
     // Output
     "sourceMap": true,
     "declaration": true,
@@ -15,7 +15,7 @@
     // Type checking
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": "./",

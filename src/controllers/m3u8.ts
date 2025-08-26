@@ -1,22 +1,21 @@
-import { UtilityHelper } from '@utils/UtilityHelper';
-import axios from "axios";
+import { Request, Response, NextFunction } from "express";
+import { M3u8Service } from "@services/m3u8Service";
 
+export class M3u8Controller {
+  static async getM3u8Content(req: Request, res: Response, next: NextFunction) {
+    try {
+      const s = req.query.s as string;
+      const segmentPath = Buffer.from(s, "base64").toString();
+      const referer = decodeURIComponent(req.query.referer as string);
+      const origin = decodeURIComponent(req.query.origin as string);
+      const domain = decodeURIComponent(req.query.domain as string);
 
-export const getM3u8Content = async (path: string, referer: string, origin: string, domain: string): Promise<string> => {
-    const m3u8Url = new URL(path, domain).toString();
+      const content = await M3u8Service.getM3u8ContentByPath(segmentPath, referer, origin, domain);
 
-    const response = await axios.get(m3u8Url, {
-      headers: {
-        Referer: referer,
-        Origin: origin,
-        "User-Agent": UtilityHelper.randomUserAgent()
-      }
-    });
-
-    let m3u8Content = response.data as string;
-
-    return m3u8Content.replace(/^(?!#)(.*\.ts.*)$/gm, (line) => {
-      const encoded = Buffer.from(line.trim()).toString("base64");
-      return `/segment?s=${encoded}&referer=${encodeURIComponent(referer)}&origin=${encodeURIComponent(origin)}`;
-    });
-};
+      res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
+      res.send(content);
+    } catch (error) {
+      next(error);
+    }
+  }
+}
