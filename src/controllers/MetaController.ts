@@ -26,9 +26,8 @@ export class MetaController {
         else {
             throw new BadRequestError(`stream type not supported`);
         }
-
     } catch (error) {
-      next(error);
+        next(error);
     }
   }
 }
