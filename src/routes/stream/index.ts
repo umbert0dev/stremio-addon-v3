@@ -11,7 +11,7 @@ router.get("/:type/:id.json",
     param("id").exists().withMessage("missing id path param").isString(),
     RequestValidator.validateRequest
   ],
-  StreamController.getTvCahnnel
+  StreamController.getTvChannel
 );
 
 export = router;

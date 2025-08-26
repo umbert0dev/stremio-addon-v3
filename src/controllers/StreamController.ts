@@ -4,7 +4,7 @@ import { BadRequestError } from "@utils/errors/BadRequestError";
 import { StreamService } from "@services/StreamService";
 
 export class StreamController {
-    static async getTvCahnnel(req: Request, res: Response, next: NextFunction) {
+    static async getTvChannel(req: Request, res: Response, next: NextFunction) {
         try {
             const { type, id } = req.params;
             if (!type) throw new BadRequestError("missing type path param");
