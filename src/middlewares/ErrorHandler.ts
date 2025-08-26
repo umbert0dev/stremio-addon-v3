@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@utils/errors/AppError';
+import { InternalServerError } from '@/src/utils/errors/InternalServerError';
 import { getErrorMessage, sendError } from '@utils/responseHelper';
 
 export class ErrorHandler {

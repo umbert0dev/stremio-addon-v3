@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { M3u8Service } from "@services/m3u8Service";
+import { M3u8Service } from "@/src/services/M3u8Service";
 
 export class M3u8Controller {
   static async getM3u8Content(req: Request, res: Response, next: NextFunction) {

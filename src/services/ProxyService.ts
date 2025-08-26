@@ -1,14 +1,10 @@
-import { Request, Response } from "express";
-import { UtilityHelper } from '@utils/UtilityHelper';
 import axios from "axios";
-import { AppError } from "@utils/errors/AppError";
-import { NotFoundError } from "@utils/errors/NotFoundError";
+import { UtilityHelper } from "@utils/UtilityHelper";
+import { NotFoundError } from "../utils/errors/NotFoundError";
+import { InternalServerError } from "../utils/errors/InternalServerError";
 
-
-export const getM3u8Content = async (req: Request, res: Response): Promise<string> => {
-    if (!req.query.d) throw new Error('Missing m3u8 URL');
-    let d = req.query.d as string;
-    let url = decodeURIComponent(Buffer.from(d, "base64").toString());
+export class ProxyService {
+  static async getM3u8ContentByUrl(url: string): Promise<string> {
     let m3u8Object = await UtilityHelper.sniffM3u8(url);
     if (!m3u8Object) {
         throw new NotFoundError("m3u8Object not found");
@@ -29,7 +25,8 @@ export const getM3u8Content = async (req: Request, res: Response): Promise<strin
         },
     });
     if (!m3u8ContentResponse || m3u8ContentResponse.data.includes('#EXT-X-KEY')) {
-        throw new AppError("content is protected by key");
+        throw new InternalServerError("content is protected by key");
     }
     return UtilityHelper.rewriteTsOrM3u8(m3u8ContentResponse.data, referer, origin, domain);
-};
+  }
+}
