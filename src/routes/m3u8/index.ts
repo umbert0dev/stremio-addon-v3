@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { BadRequestError } from "@/src/utils/errors/BadRequestError";
 import { query, validationResult } from "express-validator";
 import { validateRequest } from "@mw/validateRequest";
-import { M3u8Controller } from "@/src/controllers/m3u8";
+import { M3u8Controller } from "@/src/controllers/M3u8Controller";
 
 const router = express.Router();
 
