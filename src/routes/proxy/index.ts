@@ -3,7 +3,7 @@ import { BadRequestError } from "@/src/utils/errors/BadRequestError";
 import { NotFoundError } from "@/src/utils/errors/NotFoundError";
 import { ProxyController } from "@/src/controllers/ProxyController";
 import { param, query } from "express-validator";
-import { validateRequest } from "@/src/middlewares/validateRequest";
+import { RequestValidator } from '@mw/RequestValidator';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/:service',
   [
     param("service").exists().withMessage("missing seriviceCode path param").isString(),
     query("d").exists().withMessage("missing d param").isString(),
-    validateRequest
+    RequestValidator.validateRequest
   ],
   ProxyController.getM3u8Content
 );

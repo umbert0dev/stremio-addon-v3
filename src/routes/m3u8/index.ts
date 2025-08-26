@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { BadRequestError } from "@/src/utils/errors/BadRequestError";
 import { query, validationResult } from "express-validator";
-import { validateRequest } from "@mw/validateRequest";
+import { RequestValidator } from '@mw/RequestValidator';
 import { M3u8Controller } from "@/src/controllers/M3u8Controller";
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.get(
     query("referer").exists().withMessage("missing referer param").isString(),
     query("origin").exists().withMessage("missing origin param").isString(),
     query("domain").exists().withMessage("missing domain param").isString(),
-    validateRequest
+    RequestValidator.validateRequest
   ],
   async (req: Request, res: Response, next: NextFunction) => {
     try {
