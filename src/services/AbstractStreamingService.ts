@@ -5,6 +5,7 @@ import StreamObject from '@models/StreamObject';
 import { Meta } from '@models/Meta';
 import { Provider } from '@models/Provider';
 import { CatalogChannel } from '@models/CatalogChannel';
+import { RequestContext } from '../models/RequestContext';
 
 export abstract class AbstractStreamingService {
     externalId: string | null = null;
@@ -13,24 +14,24 @@ export abstract class AbstractStreamingService {
     cheerio = cheerioLib;
     logService = LogService;
     client: AxiosInstance;
-    mediaType: string;
+    streamType: string;
     serviceCode: string;
     protocol: string;
     host: string;
     provider!: Provider;
 
-    constructor(serviceCode: string, mediaType: string, provider: Provider, protocol: string, host: string) {
+    constructor(serviceCode: string, context: RequestContext, provider: Provider) {
         if (new.target === AbstractStreamingService) {
             throw new Error("AbstractStreamingService cannot be instantiated directly.");
         }
-        if (!mediaType) throw new Error('mediaType cannot be null');
-        if (!serviceCode) throw new Error('serviceCode cannot be null');
+        if (!context.streamType) throw new Error('streamType cannot be null');
+        if (!context.providerCode) throw new Error('serviceCode cannot be null');
 
-        this.serviceCode = serviceCode;
+        this.serviceCode = context.providerCode;
         this.client = axios.create({});
-        this.mediaType = mediaType;
-        this.protocol = protocol;
-        this.host = host;
+        this.streamType = context.streamType;
+        this.protocol = context.protocol;
+        this.host = context.host;
         this.provider = provider;
     }
 

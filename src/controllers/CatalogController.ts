@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { CatalogService } from "@services/CatalogService";
 import { BadRequestError } from "@utils/errors/BadRequestError";
+import { RequestContext } from "@models/RequestContext";
 
 export class CatalogController {
   static async getChannelList(req: Request, res: Response, next: NextFunction) {
@@ -11,9 +12,13 @@ export class CatalogController {
         if(!catalogId) throw new BadRequestError(`missing catalogId path param`);
         const providerCode = catalogId.split("_")[1] as string;
         if(!providerCode) throw new BadRequestError(`missing providerCode`);
-        const host = req.get("host") || "";
-        const protocol = req.protocol;
-        let channels = await CatalogService.getChannelList(type, providerCode, protocol, host);
+        const context: RequestContext = {
+          streamType: type,
+          providerCode: providerCode,
+          protocol: req.protocol,
+          host: req.get("host") || "",
+        };
+        let channels = await CatalogService.getChannelList(context);
         res.json({ metas: channels });
     } catch (error) {
         next(error);

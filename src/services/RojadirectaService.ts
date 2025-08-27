@@ -5,10 +5,11 @@ import { Meta } from '@models/Meta';
 import { UtilityHelper } from '@utils/UtilityHelper';
 import { Provider } from '@models/Provider';
 import { CatalogChannel } from '@models/CatalogChannel';
+import { RequestContext } from '../models/RequestContext';
 
 export class RojadirectaService extends AbstractStreamingService {
-    constructor(mediaType: string, provider: Provider, protocol: string, host: string) {
-        super('rojadirecta', mediaType, provider, protocol, host);
+    constructor(context: RequestContext, provider: Provider) {
+        super('rojadirecta', context, provider);
     }
 
     async getMediaLinks(id: string): Promise<StreamObject[]> {

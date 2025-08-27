@@ -1,9 +1,10 @@
 import { CatalogChannel } from "@models/CatalogChannel";
 import { StreamingStrategy } from "./StreamingStrategy";
+import { RequestContext } from "../models/RequestContext";
 
 export class CatalogService {
-  static async getChannelList(type: string, providerCode: string, host: string, protocol: string): Promise<CatalogChannel[]> {
-    const realService = await StreamingStrategy.create(providerCode, type, protocol, host);
+  static async getChannelList(context: RequestContext): Promise<CatalogChannel[]> {
+    const realService = await StreamingStrategy.create(context);
     return realService.getChannelList();
   }
 }

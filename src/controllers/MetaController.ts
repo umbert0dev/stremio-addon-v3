@@ -5,6 +5,7 @@ import { Meta } from "@models/Meta";
 import { StreamingStrategy } from "@services/StreamingStrategy";
 import { BadRequestError } from "@utils/errors/BadRequestError";
 import { MetaService } from "@services/MetaService";
+import { RequestContext } from "../models/RequestContext";
 
 export class MetaController {
   static async getTvChannelMeta(req: Request, res: Response, next: NextFunction) {
@@ -17,10 +18,16 @@ export class MetaController {
         const protocol = req.protocol;
         if (streamType === "tv") {
             const externalId = id.split(":")[0];
-            const providerKey = id.split("-")[1];
-            if(!providerKey) throw new BadRequestError(`providerKey is not valid`);
+            const providerCode = id.split("-")[1];
+            if(!providerCode) throw new BadRequestError(`providerCode is not valid`);
             if(!externalId) throw new BadRequestError(`externalId is not valid`);
-            const meta = await MetaService.getTvChannelMeta(providerKey, externalId, streamType, protocol, host);
+            const context: RequestContext = {
+              streamType: streamType,
+              providerCode: providerCode,
+              protocol: req.protocol,
+              host: req.get("host") || "",
+            };
+            const meta = await MetaService.getTvChannelMeta(context, externalId);
             res.json({ meta });   
         }
         else {

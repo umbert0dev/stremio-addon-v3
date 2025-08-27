@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import StremioResponse from "@models/StremioResponse";
 import { BadRequestError } from "@utils/errors/BadRequestError";
 import { StreamService } from "@services/StreamService";
+import { RequestContext } from "../models/RequestContext";
 
 export class StreamController {
     static async getTvChannel(req: Request, res: Response, next: NextFunction) {
@@ -14,12 +15,19 @@ export class StreamController {
             const host = req.get("host") || "";
             
             const externalId = id.split(":")[0];
-            const providerKey = id.split("-")[1];
+            const providerCode = id.split("-")[1];
 
             if (!externalId) throw new BadRequestError("missing externalId");
-            if (!providerKey) throw new BadRequestError("missing providerKey");
+            if (!providerCode) throw new BadRequestError("missing providerCode");
 
-            let streamList = await StreamService.getMediaLinks(providerKey, externalId, type, protocol, host);
+            const context: RequestContext = {
+                streamType: type,
+                providerCode: providerCode,
+                protocol: req.protocol,
+                host: req.get("host") || "",
+            };
+
+            let streamList = await StreamService.getMediaLinks(context, externalId);
             const stremioResponse = new StremioResponse(streamList);
             return res.json(stremioResponse.toJson());
         } catch (error) {
