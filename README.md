@@ -18,9 +18,10 @@ Apologies in advance for any possible malfunctions.
 
 🔹 **Current functionality**  
 - Retrieves **m3u8** video streams from [Rojadirecta](https://www.rojadirecta.eu).  
+- Retrieves **m3u8** video streams from [Matchstream](https://www.matchstream.do).  
 
 🔹 **Future goals**  
-- The architecture is designed to be modular, making it easy to add **new streaming providers** beyond Rojadirecta.  
+- The architecture is designed to be modular, making it easy to add **new streaming providers** beyond single provider.  
 - The aim is to keep the addon flexible and expandable, supporting multiple content sources without changing the core logic.  
 
 ---

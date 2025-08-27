@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ProxyService } from '@services/ProxyService';
 import { NotFoundError } from "@utils/errors/NotFoundError";
 import { BadRequestError } from "@utils/errors/BadRequestError";
+import { ProviderManager } from "../services/ProviderManager";
 
 export class ProxyController {
     static async getM3u8Content(req: Request, res: Response, next: NextFunction) {
@@ -9,8 +10,9 @@ export class ProxyController {
             const service = req.params.service as string;
             if(!service) throw new BadRequestError(`missing service path param`);
             if(!req.query.d) throw new BadRequestError(`missing d query param`);
+            let providersCodeList = ProviderManager.getAllProviders().map(p => p.code);
             
-            if (['rojadirecta', 'matchstream'].includes(service)) {
+            if (providersCodeList.includes(service)) {
                 let d = req.query.d as string;
                 let url = decodeURIComponent(Buffer.from(d, "base64").toString());
                 if(!url) throw new BadRequestError(`missing url`);

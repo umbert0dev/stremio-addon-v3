@@ -4,6 +4,7 @@ import { NotFoundError } from "@/src/utils/errors/NotFoundError";
 import { ProxyController } from "@/src/controllers/ProxyController";
 import { param, query } from "express-validator";
 import { RequestValidator } from '@mw/RequestValidator';
+import { ProviderManager } from "@/src/services/ProviderManager";
 
 const router = express.Router();
 
@@ -13,8 +14,11 @@ router.head('/:service', (req, res) => {
 
 router.get('/:service', 
   [
-    param("service").exists().withMessage("missing seriviceCode path param").isString(),
-    query("d").exists().withMessage("missing d param").isString(),
+    param("service")
+      .exists().withMessage("missing seriviceCode path param").isString()
+      .isIn(ProviderManager.getAllProviders().map(p => p.code)).withMessage("serviceCode not supported"),
+    query("d")
+      .exists().withMessage("missing d param").isString(),
     RequestValidator.validateRequest
   ],
   ProxyController.getM3u8Content
