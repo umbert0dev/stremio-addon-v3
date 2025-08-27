@@ -20,6 +20,9 @@ export class StreamingStrategy {
         if (!provider) {
             throw new Error(`provider with code: ${context.providerCode} not found`);
         }
+        if (!provider.active) {
+            throw new Error(`provider with code: ${context.providerCode} is not active`);
+        }
         return new ServiceClass(context, provider);
     }
 }
