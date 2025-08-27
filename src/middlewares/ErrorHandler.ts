@@ -9,7 +9,7 @@ export class ErrorHandler {
       return ResponseHelper.sendError(res, err.statusCode, err.message);
     }
     const message = ResponseHelper.getErrorMessage(err);
-    console.error('Errore non gestito:', err);
+    console.error('Unhandled error:', err);
     return ResponseHelper.sendError(res, 500, 'Internal server error', { details: message });
   }
 }
