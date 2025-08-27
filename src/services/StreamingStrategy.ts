@@ -3,9 +3,11 @@ import { AbstractStreamingService } from "./AbstractStreamingService";
 import { ProviderManager } from "./ProviderManager";
 import { RojadirectaService } from "./RojadirectaService";
 import { RequestContext } from "../models/RequestContext";
+import { MatchstreamService } from "./MatchstreamService";
 
 const providers: Record<string, any> = {
     'rojadirecta': RojadirectaService,
+    'matchstream': MatchstreamService,
 };
 
 export class StreamingStrategy {

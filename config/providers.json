@@ -4,5 +4,11 @@
     "baseURL": "http://www.rojadirecta.eu/",
     "active": true,
     "poster": "https://i.ibb.co/pvc0GncG/roja.png"
+  },
+  {
+    "code": "matchstream",
+    "baseURL": "https://matchstream.do",
+    "active": true,
+    "poster": "https://i.ibb.co/F4TgPDZX/matchstream.png"
   }
 ]

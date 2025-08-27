@@ -10,7 +10,7 @@ export class ProxyController {
             if(!service) throw new BadRequestError(`missing service path param`);
             if(!req.query.d) throw new BadRequestError(`missing d query param`);
             
-            if (['rojadirecta'].includes(service)) {
+            if (['rojadirecta', 'matchstream'].includes(service)) {
                 let d = req.query.d as string;
                 let url = decodeURIComponent(Buffer.from(d, "base64").toString());
                 if(!url) throw new BadRequestError(`missing url`);
