@@ -9,7 +9,7 @@ export class ApiController {
             const { baseURL, active } = req.body;
             if(!code) throw new BadRequestError(`missing code query param`);
             if(!baseURL) throw new BadRequestError(`missing baseURL body param`);
-            if(!active) throw new BadRequestError(`missing active body param`);
+            if(active==null) throw new BadRequestError(`missing active body param`);
 
             let providerObj = {
                 code,
