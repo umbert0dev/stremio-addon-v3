@@ -13,7 +13,7 @@ router.put('/:code',
     [
         param("code").exists().withMessage("missing code path param").isString(),
         body("baseURL").exists().withMessage("missing baseURL body param").isString(),
-        body("active").exists().withMessage("missing active body param").isBoolean(),
+        body("active").exists().withMessage("missing active body param").isBoolean().toBoolean(),
         RequestValidator.validateRequest
     ],
     ApiController.updateProvider
