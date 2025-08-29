@@ -23,8 +23,8 @@ Apologies in advance for any possible malfunctions.
 
 | Provider       | Status |
 |----------------|:-----:|
-| [Rojadirecta](https://www.rojadirecta.eu) | :white_check_mark |
-| [Matchstream](https://www.matchstream.do)  | :white_check_mark |
+| [Rojadirecta](https://www.rojadirecta.eu) | ✅ |
+| [Matchstream](https://www.matchstream.do)  | ✅ |
 
 🔹 **Future goals**  
 - The architecture is designed to be modular, making it easy to add **new streaming providers** beyond single provider.  
