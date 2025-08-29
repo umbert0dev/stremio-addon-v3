@@ -91,8 +91,8 @@ docker compose up -d
    - **Secrets tab:** add a new ***Repository secret***  
      - `HF_TOKEN` → set its value to the token you created  
    - **Variables tab:** add 2 ***Repository variables***  
-     - `HF_USER` → your Hugging Face username  
-     - `HF_REPO` → the name of your Hugging Face Space
+     - `HF_USER` → your Hugging Face username (the space owner)
+     - `HF_REPO` → the name of your Hugging Face Space (***my-new-space*** in my case)
      ![Add secrets](images/screen5.png)
      ![Add variables](images/screen6.png)
 
