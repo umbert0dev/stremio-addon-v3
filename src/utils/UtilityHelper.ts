@@ -124,7 +124,7 @@ export class UtilityHelper {
                 }, 500);
             });
             const timeout = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Timeout: No stream URL detected within 30 seconds')), 60000)
+                setTimeout(() => reject(new Error('Timeout: No stream URL detected within 60 seconds')), 60000)
             );
             await Promise.race([foundStreamUrl, timeout]);
         } catch (error) {
